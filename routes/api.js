@@ -18,12 +18,28 @@ router.post("/ninjas", async (req, res, next) => {
     }
 });
 
-router.put("/ninjas/:id", (req, res, next) => {
-    res.send("PUT req to api/ninjas/someid");
+router.put("/ninjas/:id", async (req, res, next) => {
+    try {
+        await Ninja.findByIdAndUpdate({ _id: req.params.id }, req.body);
+
+        const updatedNinja = await Ninja.findById(req.params.id);
+
+        res.send(updatedNinja);
+        
+    } catch (err) {
+        next(err);
+    }
 });
 
-router.delete("/ninjas/:id", (req, res, next) => {
-    res.send("DELETE req to api/ninjas/someid");
+router.delete("/ninjas/:id", async (req, res, next) => {
+    try {
+        const deletedNinja = await Ninja.findByIdAndRemove({ _id: req.params.id });
+
+        res.send(deletedNinja);
+
+    } catch (err) {
+        next(err);
+    }
 });
 
 module.exports = router;
