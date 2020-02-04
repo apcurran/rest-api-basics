@@ -6,7 +6,6 @@ const Ninja = require("../models/Ninja");
 router.get("/ninjas", async (req, res, next) => {
     try {
         const ninjasList = await Ninja.find({});
-    
         res.json(ninjasList);
         
     } catch (err) {
@@ -17,7 +16,6 @@ router.get("/ninjas", async (req, res, next) => {
 router.post("/ninjas", async (req, res, next) => {
     try {
         const ninja = await Ninja.create(req.body);
-
         res.json(ninja);
 
     } catch (err) {
@@ -28,9 +26,7 @@ router.post("/ninjas", async (req, res, next) => {
 router.put("/ninjas/:id", async (req, res, next) => {
     try {
         await Ninja.findByIdAndUpdate({ _id: req.params.id }, req.body);
-
         const updatedNinja = await Ninja.findById(req.params.id);
-
         res.json(updatedNinja);
         
     } catch (err) {
@@ -41,7 +37,6 @@ router.put("/ninjas/:id", async (req, res, next) => {
 router.delete("/ninjas/:id", async (req, res, next) => {
     try {
         const deletedNinja = await Ninja.findByIdAndRemove({ _id: req.params.id });
-
         res.json(`Deleted ${deletedNinja}`);
 
     } catch (err) {
