@@ -16,6 +16,7 @@ db.on("error", console.error.bind(console, "mongo connection error"));
 
 // Middleware
 app.use(logger("dev"));
+app.use(express.static("public"));
 app.use(express.json());
 
 // Initialize Routes
