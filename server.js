@@ -21,4 +21,9 @@ app.use(express.json());
 // Initialize Routes
 app.use("/api", apiRouter);
 
+// Error Handling Middleware
+app.use(function(err, req, res, next) {
+    res.status(422).send({ error: err.message });
+});
+
 app.listen(PORT, () => console.log(`Listening on port ${PORT}.`));
